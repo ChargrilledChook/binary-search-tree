@@ -9,24 +9,17 @@ class Tree
     @root = build_tree(input)
   end
 
-  # If first value, create root node
-  # Else compare value
-  # If smaller check left , >= check right
-  # If checked field is nil, field = node
-  # Else repeat on next node
-
   # Constructs a BST and returns the root node
   def build_tree(array)
     root = Node.new(array[0])
     array[1..-1].each do |element|
-      node = root
-      node = node_placer(node, element) until node_placer(node, element) == true
+      node_placer(element, root)
     end
     root
   end
 
   def insert(value)
-    # TODO
+    node_placer(value, root)
   end
 
   def delete(value)
@@ -76,9 +69,14 @@ class Tree
 
   private
 
-  # Helper function to place nodes in #build_tree
-  # Returns true if node is placed successfully, else returns the next node to check
-  def node_placer(node, element)
+  # Helper function to place nodes
+  def node_placer(value, node)
+    node = find_empty(node, value) until find_empty(node, value) == true
+  end
+
+  # Called by node_placer
+  # Returns true if node is placed successfully, else returns the next node
+  def find_empty(node, element)
     if element < node.data
       if node.left.nil?
         node.left = Node.new(element)
@@ -95,14 +93,6 @@ class Tree
         node = node.right
         node
       end
-    end
-  end
-
-  def side_picker(node, element)
-    if element < node.data
-      node.left
-    else
-      node.right
     end
   end
 end
