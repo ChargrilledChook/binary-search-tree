@@ -20,25 +20,8 @@ class Tree
   def build_tree(array)
     root = Node.new(array[0])
     array[1..-1].each do |element|
-      temp_root = root
-      placed = false
-      until placed == true
-        if element < temp_root.data
-          if temp_root.left.nil?
-            temp_root.left = Node.new(element)
-            placed = true
-          else
-            temp_root = temp_root.left
-          end
-        else
-          if temp_root.right.nil?
-            temp_root.right = Node.new(element)
-            placed = true
-          else
-            temp_root = temp_root.right
-          end
-        end
-      end
+      node = root
+      node = node_placer(node, element) until node_placer(node, element) == true
     end
     root
   end
@@ -95,15 +78,33 @@ class Tree
 
   private
 
-  def node_checker(node, side, element)
-    if node.side.nil?
-      node.side = Node.new(element)
+  # Helper function to place nodes in #build_tree
+  # Returns true if node is placed successfully, else returns the next node to check
+  def node_placer(node, element)
+    if element < node.data
+      if node.left.nil?
+        node.left = Node.new(element)
+        true
+      else
+        node = node.left
+        node
+      end
     else
-      side_picker(node)
+      if node.right.nil?
+        node.right = Node.new(element)
+        true
+      else
+        node = node.right
+        node
+      end
     end
   end
 
-  def side_picker(node)
-
+  def side_picker(node, element)
+    if element < node.data
+      node.left
+    else
+      node.right
+    end
   end
 end
