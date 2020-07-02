@@ -13,12 +13,12 @@ def build_tree(array)
 end
 
 def node_placer(node, element)
-  node = side_picker(node, element)
-  if node.nil?
-    node = Node.new(element)
+  check = side_picker(node, element)
+  if check.nil?
+    check = Node.new(element)
     true
   else
-    node
+    check
   end
 end
 
