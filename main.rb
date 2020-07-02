@@ -16,3 +16,9 @@ tree.insert(500)
 puts '----------'
 
 tree.pretty_print
+
+puts '----------'
+
+tree.insert(99)
+
+tree.pretty_print

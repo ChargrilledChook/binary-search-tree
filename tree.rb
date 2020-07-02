@@ -12,14 +12,14 @@ class Tree
   # Constructs a BST and returns the root node
   def build_tree(array)
     root = Node.new(array[0])
-    array[1..-1].each do |element|
-      node_placer(element, root)
+    array[1..-1].each do |value|
+      insert(value, root)
     end
     root
   end
 
-  def insert(value)
-    node_placer(value, root)
+  def insert(value, node = root)
+    node = find_empty(node, value) until find_empty(node, value) == true
   end
 
   def delete(value)
@@ -69,12 +69,7 @@ class Tree
 
   private
 
-  # Helper function to place nodes
-  def node_placer(value, node)
-    node = find_empty(node, value) until find_empty(node, value) == true
-  end
-
-  # Called by node_placer
+  # Called by insert
   # Returns true if node is placed successfully, else returns the next node
   def find_empty(node, element)
     if element < node.data
