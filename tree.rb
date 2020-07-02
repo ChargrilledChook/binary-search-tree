@@ -9,7 +9,6 @@ class Tree
     @root = build_tree(input)
   end
 
-
   # If first value, create root node
   # Else compare value
   # If smaller check left , >= check right
@@ -67,14 +66,13 @@ class Tree
   end
 
   # Bonus - define_method / metaprogramming
-  
+
   # This function taken from Odin Discord. Tool to help visualize tree
-  def pretty_print(node = root, prefix="", is_left = true)
-    pretty_print(node.right, "#{prefix}#{is_left ? "│   " : "    "}", false) if node.right
-    puts "#{prefix}#{is_left ? "└── " : "┌── "}#{node.data.to_s}"
-    pretty_print(node.left, "#{prefix}#{is_left ? "    " : "│   "}", true) if node.left
+  def pretty_print(node = root, prefix = '', is_left = true)
+    pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
+    puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
+    pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
   end
-  
 
   private
 

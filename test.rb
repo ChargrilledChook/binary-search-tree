@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'node'
 require_relative 'tree'
 
@@ -12,12 +14,12 @@ end
 
 def node_placer(node, element)
   node = side_picker(node, element)
-    if node.nil?
-      node = Node.new(element)
-      true
-    else
-      node
-    end
+  if node.nil?
+    node = Node.new(element)
+    true
+  else
+    node
+  end
 end
 
 def side_picker(node, element)
@@ -28,8 +30,7 @@ def side_picker(node, element)
   end
 end
 
-
-def node_checker(node, side, element)
+def node_checker(node, _side, element)
   if node.side.nil?
     node.side = Node.new(element)
   else
