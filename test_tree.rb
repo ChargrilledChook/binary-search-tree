@@ -23,7 +23,7 @@ class Tree
   def delete(value)
     # TODO
   end
-  
+
   def find(value)
     # TODO
   end
@@ -94,3 +94,14 @@ class Tree
   end
 
 end
+
+ # TODO
+    # Case 1 - No children
+    node = traverse_tree(value, node) until traverse_tree(value, node).nil? || node.left.data == value || node.right.data == value
+    if node_left?(value, node)
+      node.left = nil
+    else
+      node.right = nil
+    end
+    # Case 2 - 1 child
+    # Case 3 - 2 children

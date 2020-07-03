@@ -25,9 +25,19 @@ class Tree
     end
   end
 
-  def delete(value)
+  def delete(value, node = root)
     # TODO
     # Case 1 - No children
+    if find(value).nil?
+      nil
+    else
+      found = false
+      until found == true
+        node = traverse_tree(value, node)
+        found = node_left?(value, node) ? check_node?(value, node.left) : check_node?(value, node.right)
+      end
+      node_left?(value, node) ? node.left = nil : node.right = nil
+    end
     # Case 2 - 1 child
     # Case 3 - 2 children
   end
@@ -93,4 +103,9 @@ class Tree
     puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
     pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
   end
+
+  def check_node?(value, node)
+    node.data == value
+  end
+
 end
