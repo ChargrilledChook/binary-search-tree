@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Implements a binary search tree
 class Tree
   attr_accessor :root
   attr_reader :input
@@ -21,13 +24,18 @@ class Tree
       node.right = Node.new(value)
     end
   end
-  
+
   def delete(value)
     # TODO
+    # Case 1 - No children
+    # Case 2 - 1 child
+    # Case 3 - 2 children
   end
-  
-  def find(value)
-    # TODO
+
+  # Returns node object if value is found, else returns nil
+  def find(value, node = root)
+    node = traverse_tree(value, node) until traverse_tree(value, node).nil? || node.data == value
+    node.data == value ? node : nil
   end
 
   def level_order(block)
@@ -64,7 +72,7 @@ class Tree
   end
 
   # Bonus - define_method / metaprogramming
-  
+
   private
 
   def traverse_tree(value, node)

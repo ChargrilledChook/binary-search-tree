@@ -15,6 +15,4 @@ tree.insert(500)
 puts '------------'
 tree.to_s
 
-tree.insert(-99999)
-puts '------------'
-tree.to_s
+puts tree.find(500)
