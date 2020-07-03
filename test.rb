@@ -63,3 +63,17 @@ def node_placer_test(value, node)
     node
   end
 end
+
+
+def level_order
+  result = [root.data]
+  queue = [root]
+  until queue.empty?
+    result << queue[0].left.data unless queue[0].left.nil?
+    result << queue[0].right.data unless queue[0].right.nil?
+    queue << queue[0].left unless queue[0].left.nil?
+    queue << queue[0].right unless queue[0].right.nil?
+    queue.shift
+  end
+  result
+end

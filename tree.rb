@@ -53,21 +53,22 @@ class Tree
     node.data == value ? node : nil
   end
 
-  # Works but memory might get clogged on a bigger tree - queue not being emptied
   def level_order
     result = [root.data]
     queue = [root]
-    queue.each do |value|
-      result << value.left.data unless value.left.nil?
-      result << value.right.data unless value.right.nil?
-      queue << value.left unless value.left.nil?
-      queue << value.right unless value.right.nil?
+    until queue.empty?
+      result << queue[0].left.data unless queue[0].left.nil?
+      result << queue[0].right.data unless queue[0].right.nil?
+      queue << queue[0].left unless queue[0].left.nil?
+      queue << queue[0].right unless queue[0].right.nil?
+      queue.shift
     end
     result
   end
 
   def in_order(block)
-    # TODO
+    result = []
+
   end
 
   def pre_order(block)
