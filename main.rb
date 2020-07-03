@@ -3,8 +3,8 @@
 require_relative 'node'
 require_relative 'tree'
 
-random_arr = Array.new(15) { rand(1..100) }
-static_arr = [5,4,3,6,2,1,7,8,9]
+_random_arr = Array.new(15) { rand(1..100) }
+static_arr = [5, 4, 3, 6, 2, 1, 7, 8, 9]
 
 pp static_arr
 

@@ -16,6 +16,7 @@ class Tree
     root
   end
 
+  # TODO: Edge case - should not be able to insert duplicate value
   def insert(value, node = root)
     node = traverse_tree(value, node) until traverse_tree(value, node).nil?
     if node_left?(value, node)
@@ -26,20 +27,19 @@ class Tree
   end
 
   def delete(value, node = root)
-    # TODO
     # Case 1 - No children
-    if find(value).nil?
-      nil
-    else
-      found = false
-      until found == true
-        node = traverse_tree(value, node)
-        found = node_left?(value, node) ? check_node?(value, node.left) : check_node?(value, node.right)
-      end
-      node_left?(value, node) ? node.left = nil : node.right = nil
+    return nil if find(value).nil?
+
+    found = false
+    until found == true
+      node = traverse_tree(value, node)
+      found = node_left?(value, node) ? check_node?(value, node.left) : check_node?(value, node.right)
     end
-    # Case 2 - 1 child
-    # Case 3 - 2 children
+    # children = count_children(node)
+    node_left?(value, node) ? node.left = nil : node.right = nil
+
+    # TODO: Case 2 - 1 child
+    # TODO: Case 3 - 2 children
   end
 
   # Returns node object if value is found, else returns nil
@@ -108,4 +108,10 @@ class Tree
     node.data == value
   end
 
+  def count_children(node)
+    counter = 0
+    counter += 1 unless node.left.nil?
+    counter += 1 unless node.right.nil?
+    counter
+  end
 end

@@ -22,7 +22,7 @@ end
 
 def node_placer(node, element)
   if element < node.data
-   node.left
+    node.left
   else
     node.right
   end
