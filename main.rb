@@ -9,10 +9,12 @@ pp test_arr
 
 tree = Tree.new(test_arr)
 
-tree.pretty_print
+tree.to_s
 
 tree.insert(500)
 puts '------------'
-tree.pretty_print
+tree.to_s
 
-
+tree.insert(-99999)
+puts '------------'
+tree.to_s

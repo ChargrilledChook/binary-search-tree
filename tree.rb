@@ -1,6 +1,3 @@
-# frozen_string_literal: true
-
-# Represents a binary search tree. Node class implements individual data
 class Tree
   attr_accessor :root
   attr_reader :input
@@ -17,13 +14,18 @@ class Tree
   end
 
   def insert(value, node = root)
-    node = node_placer(value, node) until node_placer(value, node) == true
+    node = traverse_tree(value, node) until traverse_tree(value, node).nil?
+    if node_left?(value, node)
+      node.left = Node.new(value)
+    else
+      node.right = Node.new(value)
+    end
   end
-
+  
   def delete(value)
-    node = node_placer(node, value) until node_placer(node, value) == true
+    # TODO
   end
-
+  
   def find(value)
     # TODO
   end
@@ -56,32 +58,31 @@ class Tree
     # TODO
   end
 
-  # Bonus - define_method / metaprogramming
+  # See private methods for details
+  def to_s
+    pretty_print
+  end
 
-  # This function taken from Odin Discord. Tool to help visualize tree
+  # Bonus - define_method / metaprogramming
+  
+  private
+
+  def traverse_tree(value, node)
+    if node_left?(value, node)
+      node.left
+    else
+      node.right
+    end
+  end
+
+  def node_left?(value, node)
+    value < node.data
+  end
+
+  # Credit to Fensus from Odin discord - prints a visual reprentation of tree in console
   def pretty_print(node = root, prefix = '', is_left = true)
     pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
     puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
     pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
-  end
-
-  private
-
-  # Called by insert
-  # Returns true if node is placed successfully, else returns the next node
-  def node_placer(value, node)
-    if value < node.data && node.left.nil?
-      node.left = Node.new(value)
-      true
-    elsif value < node.data && !node.left.nil?
-      node = node.left
-      node
-    elsif value >= node.data && node.right.nil?
-      node.right = Node.new(value)
-      true
-    else
-      node = node.right
-      node
-    end
   end
 end
