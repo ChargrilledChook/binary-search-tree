@@ -4,6 +4,8 @@
 
 # Represents a single node in a binary search tree
 class Node
+  include Comparable
+
   attr_accessor :left, :right, :data
 
   def initialize(data, left = nil, right = nil)

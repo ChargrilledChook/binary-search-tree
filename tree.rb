@@ -17,11 +17,11 @@ class Tree
   end
 
   def insert(value, node = root)
-    node = node_placer(node, value) until node_placer(node, value) == true
+    node = node_placer(value, node) until node_placer(value, node) == true
   end
 
   def delete(value)
-    # TODO
+    node = node_placer(node, value) until node_placer(node, value) == true
   end
 
   def find(value)
@@ -69,23 +69,19 @@ class Tree
 
   # Called by insert
   # Returns true if node is placed successfully, else returns the next node
-  def node_placer(node, element)
-    if element < node.data
-      if node.left.nil?
-        node.left = Node.new(element)
-        true
-      else
-        node = node.left
-        node
-      end
+  def node_placer(value, node)
+    if value < node.data && node.left.nil?
+      node.left = Node.new(value)
+      true
+    elsif value < node.data && !node.left.nil?
+      node = node.left
+      node
+    elsif value >= node.data && node.right.nil?
+      node.right = Node.new(value)
+      true
     else
-      if node.right.nil?
-        node.right = Node.new(element)
-        true
-      else
-        node = node.right
-        node
-      end
+      node = node.right
+      node
     end
   end
 end
