@@ -26,10 +26,15 @@ class Tree
     end
   end
 
+  # TODO: can't delete direct children of root
   def delete(value, node = root)
-    # Case 1 - No children
+    # Covers edge case of deleting root node
+    if node.data == value
+      self.root = nil
+      exit
+    end
     return nil if find(value).nil?
-
+    # Case 1 - No children
     found = false
     until found == true
       node = traverse_tree(value, node)
@@ -48,8 +53,17 @@ class Tree
     node.data == value ? node : nil
   end
 
-  def level_order(block)
-    # TODO
+  # Works but memory might get clogged on a bigger tree - queue not being emptied
+  def level_order
+    result = [root.data]
+    queue = [root]
+    queue.each do |value|
+      result << value.left.data unless value.left.nil?
+      result << value.right.data unless value.right.nil?
+      queue << value.left unless value.left.nil?
+      queue << value.right unless value.right.nil?
+    end
+    result
   end
 
   def in_order(block)
