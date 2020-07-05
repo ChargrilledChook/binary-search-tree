@@ -67,9 +67,8 @@ class Tree
     result
   end
 
-  def in_order(block)
-    result = []
-
+  def in_order
+    _result = []
   end
 
   def pre_order(block)
