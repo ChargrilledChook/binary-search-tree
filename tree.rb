@@ -34,6 +34,7 @@ class Tree
       exit
     end
     return nil if find(value).nil?
+
     # Case 1 - No children
     found = false
     until found == true
