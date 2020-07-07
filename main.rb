@@ -20,3 +20,5 @@ tree.to_s
 tree.to_s
 
 pp tree.level_order
+
+tree.in_order

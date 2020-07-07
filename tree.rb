@@ -53,22 +53,23 @@ class Tree
     node.data == value ? node : nil
   end
 
+  # Queue collects node objects, result collects their data
   def level_order
-    result = [root.data]
     queue = [root]
+    result = []
     until queue.empty?
-      result << queue[0].left.data unless queue[0].left.nil?
-      result << queue[0].right.data unless queue[0].right.nil?
-      queue << queue[0].left unless queue[0].left.nil?
-      queue << queue[0].right unless queue[0].right.nil?
+      result << queue.first.data
+      queue << queue.first.left unless queue.first.left.nil?
+      queue << queue.first.right unless queue.first.right.nil?
       queue.shift
     end
     result
   end
 
-  def in_order(block)
-    result = []
-
+  def in_order
+    _result = []
+    go_left(root)
+    go_right(root)
   end
 
   def pre_order(block)
@@ -128,5 +129,23 @@ class Tree
     counter += 1 unless node.left.nil?
     counter += 1 unless node.right.nil?
     counter
+  end
+
+  def go_left(node)
+    if node.left.nil?
+      nil
+    else
+      puts node.data
+      go_left(node.left)
+    end
+  end
+
+  def go_right(node)
+    if node.right.nil?
+      nil
+    else
+      puts node.data
+      go_right(node.right)
+    end
   end
 end

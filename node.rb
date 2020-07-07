@@ -8,6 +8,7 @@ class Node
 
   attr_accessor :left, :right, :data
 
+  # Data takes a value, left and right are pointers to other node objects
   def initialize(data, left = nil, right = nil)
     @data = data
     @left = left
