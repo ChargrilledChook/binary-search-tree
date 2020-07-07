@@ -60,8 +60,8 @@ class Tree
     result = []
     until queue.empty?
       result << queue.first.data
-      queue << queue.first.left unless queue.first.left.nil?
-      queue << queue.first.right unless queue.first.right.nil?
+      queue << queue.first.left if queue.first.left
+      queue << queue.first.right if queue.first.right
       queue.shift
     end
     result
