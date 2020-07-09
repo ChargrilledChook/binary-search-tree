@@ -34,7 +34,6 @@ class Tree
     end
     return unless find(value)
 
-
     found = false
     until found == true
       node = traverse_tree(value, node)
@@ -98,16 +97,25 @@ class Tree
     result << node.data
   end
 
-  def depth(node)
-    # TODO
+  def depth(node = root)
+    if node
+      left_height = depth(node.left)
+      right_height = depth(node.right)
+      left_height > right_height ? left_height + 1 : right_height + 1
+    else
+      -1
+    end
   end
 
-  def balanced?
-    # TODO
+  def balanced?(node = root)
+    left = depth(node.left)
+    right = depth(node.right)
+    (left - right) > -2 && (left - right) < 2
   end
 
   def rebalance!
-    # TODO
+    #new_input = self.post_order
+    self.root = build_tree(new_input)
   end
 
   # See private methods for details
@@ -156,23 +164,5 @@ class Tree
     counter += 1 if node.left
     counter += 1 if node.right
     counter
-  end
-
-  def go_left(node)
-    if node.left.nil?
-      nil
-    else
-      puts node.data
-      go_left(node.left)
-    end
-  end
-
-  def go_right(node)
-    if node.right.nil?
-      nil
-    else
-      puts node.data
-      go_right(node.right)
-    end
   end
 end
