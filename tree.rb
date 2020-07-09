@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require 'pry'
 
 # Implements a binary search tree
 class Tree
@@ -31,7 +32,7 @@ class Tree
       self.root = nil
       exit
     end
-    return nil if find(value).nil?
+    return unless find(value)
 
     # Case 1 - No children
     found = false
@@ -39,8 +40,17 @@ class Tree
       node = traverse_tree(value, node)
       found = node_left?(value, node) ? check_node?(value, node.left) : check_node?(value, node.right)
     end
-    # children = count_children(node)
-    node_left?(value, node) ? node.left = nil : node.right = nil
+    delete_node = find(value)
+    children = count_children(delete_node)
+    case children
+    when 0
+      node_left?(value, node) ? node.left = nil : node.right = nil
+    when 1
+      delete_node.left ? node.left = delete_node.left : node.right = delete_node.right
+      binding.pry
+    else
+    end
+
 
     # TODO: Case 2 - 1 child
     # TODO: Case 3 - 2 children

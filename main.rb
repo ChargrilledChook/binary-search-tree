@@ -15,12 +15,9 @@ tree.insert(500)
 puts '------------'
 tree.to_s
 tree.insert(500)
+tree.insert(499)
 tree.to_s
-tree.insert(500)
-tree.insert(500)
-tree.insert(500)
-tree.insert(500)
-tree.insert(500)
+tree.delete(500)
 tree.to_s
 
 pp "Level order =>  #{tree.level_order}"
