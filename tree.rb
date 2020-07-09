@@ -34,7 +34,7 @@ class Tree
     end
     return unless find(value)
 
-    # Case 1 - No children
+
     found = false
     until found == true
       node = traverse_tree(value, node)
@@ -43,17 +43,20 @@ class Tree
     delete_node = find(value)
     children = count_children(delete_node)
     case children
+    # Case 1 - No children
     when 0
       node_left?(value, node) ? node.left = nil : node.right = nil
+      # Case 2 - 1 child
     when 1
-      delete_node.left ? node.left = delete_node.left : node.right = delete_node.right
-      binding.pry
+      if delete_node.left
+        new_child = delete_node.left
+      else
+        new_child = delete_node.right
+      end
+      node.left ? node.left = new_child : node.right = new_child
     else
+      # TODO: Case 3 - 2 children
     end
-
-
-    # TODO: Case 2 - 1 child
-    # TODO: Case 3 - 2 children
   end
 
   # Returns node object if value is found, else returns nil
