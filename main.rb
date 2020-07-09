@@ -16,8 +16,11 @@ puts '------------'
 tree.to_s
 tree.insert(500)
 tree.to_s
+tree.insert(500)
+tree.insert(500)
+tree.insert(500)
+tree.insert(500)
+tree.insert(500)
+tree.to_s
 
-pp tree.level_order
-
-tree.in_order
 pp "Level order =>  #{tree.level_order}"

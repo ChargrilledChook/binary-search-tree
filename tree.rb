@@ -12,21 +12,19 @@ class Tree
   # Constructs a BST and returns the root node
   def build_tree(array)
     root = Node.new(array[0])
-    array.uniq[1..-1].each { |value| insert(value, root) }
+    array.uniq[1..-1].each { |value| base_insert(value, root) }
     root
   end
 
-  # TODO: Edge case - should not be able to insert duplicate value
-  def insert(value, node = root)
-    node = traverse_tree(value, node) until traverse_tree(value, node).nil?
-    if node_left?(value, node)
-      node.left = Node.new(value)
-    else
-      node.right = Node.new(value)
-    end
+  # Split because inserting into a new tree needs a slightly different implementation
+  # See base insert for implementation details
+  def insert(value)
+    return if find(value)
+
+    base_insert(value)
   end
 
-  # TODO: can't delete direct children of root
+  # TODO: should be able to delete direct children of root
   def delete(value, node = root)
     # Covers edge case of deleting root node
     if node.data == value
@@ -102,6 +100,15 @@ class Tree
 
   private
 
+  def base_insert(value, node = root)
+    node = traverse_tree(value, node) until traverse_tree(value, node).nil?
+    if node_left?(value, node)
+      node.left = Node.new(value)
+    else
+      node.right = Node.new(value)
+    end
+  end
+
   def traverse_tree(value, node)
     if node_left?(value, node)
       node.left
@@ -127,8 +134,8 @@ class Tree
 
   def count_children(node)
     counter = 0
-    counter += 1 unless node.left.nil?
-    counter += 1 unless node.right.nil?
+    counter += 1 if node.left
+    counter += 1 if node.right
     counter
   end
 
