@@ -114,7 +114,7 @@ class Tree
   end
 
   def rebalance!
-    #new_input = self.post_order
+    new_input = level_order
     self.root = build_tree(new_input)
   end
 

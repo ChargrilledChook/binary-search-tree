@@ -3,77 +3,21 @@
 require_relative 'node'
 require_relative 'tree'
 
-def side_picker(node, element)
-  if element < node.data
-    node.left
-  else
-    node.right
-  end
-end
+_random_arr = Array.new(15) { rand(1..100) }
+static_arr = [5, 4, 3, 6, 2, 1, 7, 8, 9]
+static_arr2 = [7, 4, 23, 8, 9, 4, 3, 5, 7, 1, 9, 67, 6345, 324]
+static_arr3 = [3, 2, 1, 7, 5, 4, 6]
+static_arr4 = [1, 3, 2, 4, 5]
+static_arr5 = [100, 200, 150, 300, 20, 10, 30]
+tree = Tree.new(static_arr)
+p "Balanced? => #{tree.balanced?}"
+tree.to_s
 
-def insert(value, node = root)
-  node = node_placer(node, value) until node_placer(node, value).nil?
-  node.data = value
-end
-
-def delete(value)
-  node = node_placer(node, value) until node_placer(node, value) == true
-end
-
-def node_placer(node, element)
-  if element < node.data
-    node.left
-  else
-    node.right
-  end
-end
-
-def node_placer(node, value)
-  if value < node.data && node.left.nil?
-    node.left = Node.new(value)
-    true
-  elsif value < node.data && !node.left.nil?
-    node = node.left
-    node
-  elsif value >= node.data && node.right.nil?
-    node.right = Node.new(value)
-    true
-  else
-    node = node.right
-    node
-  end
-end
-
-def node_left?(value, node)
-  value < node.data
-end
-
-def node_placer_test(value, node)
-  if node_left?(value, node) && node.left.nil?
-    node.left = Node.new(value)
-    true
-  elsif node_left?(value, node) && !node.left.nil?
-    node = node.left
-    node
-  elsif !node_left?(value, node) && node.left.nil?
-    node.right = Node.new(value)
-    true
-  else
-    node = node.right
-    node
-  end
-end
-
-
-def level_order
-  result = [root.data]
-  queue = [root]
-  until queue.empty?
-    result << queue[0].left.data unless queue[0].left.nil?
-    result << queue[0].right.data unless queue[0].right.nil?
-    queue << queue[0].left unless queue[0].left.nil?
-    queue << queue[0].right unless queue[0].right.nil?
-    queue.shift
-  end
-  result
-end
+tree.insert(500)
+p "Balanced? => #{tree.balanced?}"
+tree.insert(501)
+p "Balanced? => #{tree.balanced?}"
+tree.to_s
+tree.rebalance!
+p "Balanced? => #{tree.balanced?}"
+tree.to_s
