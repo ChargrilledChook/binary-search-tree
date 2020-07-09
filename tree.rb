@@ -43,12 +43,11 @@ class Tree
     delete_node = find(value)
     children = count_children(delete_node)
     case children
-    # Case 1 - No children
+    # Case 1 - No children (leaf node)
     when 0
       node_left?(value, node) ? node.left = nil : node.right = nil
       # Case 2 - 1 child
     when 1
-      binding.pry
       if delete_node.left
         new_child = delete_node.left
       else
@@ -79,22 +78,24 @@ class Tree
     result
   end
 
-  def in_order(node = root)
-    in_order(node.left) if node.left
-    print "#{node.data} "
-    in_order(node.right) if node.right
+  def in_order(node = root, result = [])
+    in_order(node.left, result) if node.left
+    result << node.data
+    in_order(node.right, result) if node.right
+    result
   end
 
-  def pre_order(node = root)
-    print "#{node.data} "
-    pre_order(node.left) if node.left
-    pre_order(node.right) if node.right
+  def pre_order(node = root, result = [])
+    result << node.data
+    pre_order(node.left, result) if node.left
+    pre_order(node.right, result) if node.right
+    result
   end
 
-  def post_order(node = root)
-    post_order(node.left) if node.left
-    post_order(node.right) if node.right
-    print "#{node.data} "
+  def post_order(node = root, result = [])
+    post_order(node.left, result) if node.left
+    post_order(node.right, result) if node.right
+    result << node.data
   end
 
   def depth(node)
