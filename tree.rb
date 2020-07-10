@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-require 'pry'
 
 # Implements a binary search tree
 class Tree
@@ -49,11 +48,7 @@ class Tree
       node_left?(value, node) ? node.left = nil : node.right = nil
       # Case 2 - 1 child
     when 1
-      if delete_node.left
-        new_child = delete_node.left
-      else
-        new_child = delete_node.right
-      end
+      new_child = delete_node.left || delete_node.right
       node.left.data == value ? node.left = new_child : node.right = new_child
     else
       # Case 3 - 2 children
@@ -177,9 +172,9 @@ class Tree
     middle = (array.size / 2)
     result << array[middle]
     left = array.slice(0...middle)
-    binary_balance(left, result) unless left.size < 1
-    right = array.slice((middle + 1 )..-1)
-    binary_balance(right, result) unless right.size < 1
+    binary_balance(left, result) unless left.empty?
+    right = array.slice((middle + 1)..-1)
+    binary_balance(right, result) unless right.empty?
     result
   end
 
@@ -188,5 +183,4 @@ class Tree
     node = node.left while node.left
     node
   end
-
 end
