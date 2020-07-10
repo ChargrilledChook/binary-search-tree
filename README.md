@@ -1,6 +1,6 @@
 # Binary Search Trees
 
-An assignment for The Odin Project
+An assignment for The Odin Project. Version 1 completed 10/07/2020.
 
 [Details and specs of assignment](https://www.theodinproject.com/courses/ruby-programming/lessons/data-structures-and-algorithms?ref=lnav)
 
@@ -17,6 +17,8 @@ Builds a balanced binary search tree from an array of integers. Has several meth
 Quite a step up in difficulty from linked lists but learned a few good lessons. Particularly, don't try to DRY out code too soon before trying hard to see the most obvious abstractions. DRYing too fast lead me into a corner with the #delete method that was difficult to get out of.
 
 Most of the code is ok, aside from #delete which I would redo from the ground up. Some of the tree traversal private methods could also be revisited.
+
+This would be a good one to revisit after some more practice and study of algorithms and data structures.
 
 ## Visual Example of Output
 
