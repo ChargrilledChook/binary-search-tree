@@ -10,7 +10,8 @@ p "In order    => #{tree.in_order}"
 p "Post order  => #{tree.post_order}"
 tree.to_s
 
-5.times { tree.insert(rand(101..200)) }
+p 'Attempting to unbalance...'
+10.times { tree.insert(rand(101..200)) }
 
 p "Balanced?   => #{tree.balanced?}"
 tree.to_s

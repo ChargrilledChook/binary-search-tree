@@ -12,8 +12,10 @@ class Tree
 
   # Constructs a BST and returns the root node
   def build_tree(array)
-    root = Node.new(array[0])
-    array.uniq[1..-1].each { |value| base_insert(value, root) }
+    input = array.sort.uniq
+    input = binary_balance(input)
+    root = Node.new(input.first)
+    input[1..-1].each { |value| base_insert(value, root) }
     root
   end
 
@@ -114,8 +116,8 @@ class Tree
   end
 
   def rebalance!
-    new_input = level_order
-    self.root = build_tree(new_input)
+    arr = in_order
+    self.root = build_tree(arr)
   end
 
   # See private methods for details
@@ -164,5 +166,15 @@ class Tree
     counter += 1 if node.left
     counter += 1 if node.right
     counter
+  end
+
+  def binary_balance(array, result = [])
+    middle = (array.size / 2)
+    result << array[middle]
+    left = array.slice(0...middle)
+    binary_balance(left, result) unless left.size < 1
+    right = array.slice((middle + 1 )..-1)
+    binary_balance(right, result) unless right.size < 1
+    result
   end
 end
