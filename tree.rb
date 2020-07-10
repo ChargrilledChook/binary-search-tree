@@ -56,6 +56,7 @@ class Tree
       end
       node.left.data == value ? node.left = new_child : node.right = new_child
     else
+      # Case 3 - 2 children
       replacement_node = find_successor(delete_node.right)
       temp = replacement_node.data
       delete(replacement_node.data)
