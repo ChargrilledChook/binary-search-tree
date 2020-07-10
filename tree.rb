@@ -56,7 +56,10 @@ class Tree
       end
       node.left.data == value ? node.left = new_child : node.right = new_child
     else
-      # TODO: Case 3 - 2 children
+      replacement_node = find_successor(delete_node.right)
+      temp = replacement_node.data
+      delete(replacement_node.data)
+      delete_node.data = temp
     end
   end
 
@@ -168,6 +171,7 @@ class Tree
     counter
   end
 
+  # Recursively creates an array that will lead to a balanced BST
   def binary_balance(array, result = [])
     middle = (array.size / 2)
     result << array[middle]
@@ -177,4 +181,11 @@ class Tree
     binary_balance(right, result) unless right.size < 1
     result
   end
+
+  # Arg should be right child of node to be deleted
+  def find_successor(node)
+    node = node.left while node.left
+    node
+  end
+
 end
