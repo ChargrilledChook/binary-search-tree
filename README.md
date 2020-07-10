@@ -2,11 +2,21 @@
 
 An assignment for The Odin Project
 
-[Details](https://www.theodinproject.com/courses/ruby-programming/lessons/data-structures-and-algorithms?ref=lnav)
+[Details and specs of assignment](https://www.theodinproject.com/courses/ruby-programming/lessons/data-structures-and-algorithms?ref=lnav)
+
+## Features
+
+Builds a balanced binary search tree from an array of integers. Has several methods availbe to it including search, insertion, deletion, and a variety of different traversal methods (level order, different depth first strategies etc).
 
 ## Known Bugs
 
-Can't delete a direct child of the root node.
+* Can't delete a direct child of the root node.
+
+## Reflections
+
+Quite a step up in difficulty from linked lists but learned a few good lessons. Particularly, don't try to DRY out code too soon before trying hard to see the most obvious abstractions. DRYing too fast lead me into a corner with the #delete method that was difficult to get out of.
+
+Most of the code is ok, aside from #delete which I would redo from the ground up. Some of the tree traversal private methods could also be revisited.
 
 ## Visual Example of Output
 
